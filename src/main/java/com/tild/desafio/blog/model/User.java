@@ -16,6 +16,10 @@ public class User {
     private String name;
 
     private String twitter;
+    
+    private String phone;
+    
+    private String email;
 
     @JsonIgnoreProperties("user")
     @OneToMany(mappedBy = "user")
@@ -49,7 +53,23 @@ public class User {
         this.twitter = twitter;
     }
 
-    public List<Post> getPosts() {
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Post> getPosts() {
         return posts;
     }
 
