@@ -3,8 +3,11 @@ package com.tild.desafio.posts;
 import com.tild.desafio.blog.data.PostRepository;
 import com.tild.desafio.blog.data.UserRepository;
 import com.tild.desafio.blog.model.Post;
+import com.tild.desafio.blog.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,15 @@ public class PostsController {
         mv.addObject("users", userRepository.findAll());
         mv.addObject("newPost", new Post());
 
+        return mv;
+    }
+    
+    @GetMapping("/form")
+    public ModelAndView newUser(){
+        ModelAndView mv = new ModelAndView("form");
+    	
+        mv.addObject("newUser", new User());
+        
         return mv;
     }
 
