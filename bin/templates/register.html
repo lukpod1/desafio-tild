@@ -1,6 +1,5 @@
 <!doctype html>
-<!-- <html xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"> -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -10,30 +9,30 @@
 		<div>
 			<div class="posts">
 				<h1 class="content-subhead">New User</h1>
-				<form th:object="${user}" th:action="@{/form/register}" class="pure-form pure-form-aligned" method="post">
+				<form th:object="${newUser}" th:action="@{/form/save}" class="pure-form pure-form-aligned" method="post">
 					<fieldset>
 						<div class="pure-control-group">
 							<label for="name">Name</label> 
-							<input th:field="*{name}" class="pure-input-3-4" type="text" id="name" placeholder="Name" />
+							<input th:field="*{name}" class="pure-input-3-4" type="text" required="required" id="name" placeholder="Name" />
 						</div>
 
 						<div class="pure-control-group">
 
 							<label for="twitter">Twitter</label> 
-							<input type="text" class="pure-input-3-4" id="twitter" placeholder="@user" />
+							<input th:field="*{twitter}" type="text" required="required" class="pure-input-3-4" id="twitter" placeholder="@user" />
 
 						</div>
 						<div class="pure-control-group">
 
 							<label for="phone">Phone</label> 
-							<input type="text" class="pure-input-3-4" id="phone" placeholder="(99) 9999-9999" />
+							<input th:field="*{phone}" type="text" required="required" class="pure-input-3-4" id="phone" placeholder="(99) 9999-9999" />
 
 						</div>
 
 						<div class="pure-control-group">
 
 							<label for="email">Email</label> 
-							<input type="text" class="pure-input-3-4" id="email" placeholder="name@gmail.com" />
+							<input th:field="*{email}" type="email" required="required" class="pure-input-3-4" id="email" placeholder="name@gmail.com" />
 
 						</div>
 

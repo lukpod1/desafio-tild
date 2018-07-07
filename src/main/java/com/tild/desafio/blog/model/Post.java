@@ -1,10 +1,22 @@
 package com.tild.desafio.blog.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.Preconditions;
-
-import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 public class Post {
@@ -23,8 +35,17 @@ public class Post {
     @JsonIgnoreProperties("posts")
     private User user;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Post_Tag", 
+            joinColumns = { @JoinColumn(name = "post_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+        )
+    private List<Tag> tags;
+    
     public Post() {
         super();
+        tags = new ArrayList<>();
     }
 
     public Long getId() {
@@ -59,7 +80,20 @@ public class Post {
         this.user = user;
     }
 
-    @Override
+    
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(String[] tags) {
+		Arrays.asList(tags).stream()
+		.forEach(tag -> {
+			this.tags.add(new Tag(tag));
+		});
+	}
+
+	@Override
     public String toString() {
         return "Post{" +
                 "id=" + id +

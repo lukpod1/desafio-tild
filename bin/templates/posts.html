@@ -19,8 +19,9 @@
 						<p class="post-meta">
 							By
 							<!-- <a class="post-author" target="_blank" th:href="${post.user.getTwitterUrl()}" th:text="${post.user.name}">under</a>  -->
-							<a class="post-category post-category-js" href="#">MULTIPLE</a>
-							<a class="post-category post-category-yui" href="#">FUTURE TAG</a>
+							<a class="post-category post-category-js" href="#" th:each="tag : ${post.tags}" th:text="${tag.text}"></a>
+<!-- 							<a class="post-category post-category-js" href="#">MULTIPLE</a> -->
+<!-- 							<a class="post-category post-category-yui" href="#">FUTURE TAG</a> -->
 						</p>
 					</header>
 
@@ -79,6 +80,7 @@
 															],
 															[
 																'font', [
+												
 																	'strikethrough',
 																	'superscript',
 																	'subscript'
@@ -94,6 +96,11 @@
 															]
 														]
 													});
+												
+												$("#idTags").tagit({
+												    fieldName: "tags"
+												});
+												
 											});
 
 									var postForm = function () {
@@ -102,6 +109,11 @@
 									}
 								</script>
 							</div>
+						</div>
+						
+						<div class="pure-control-group">
+							<label for="idTags">Adicione Tags</label>
+							<input id="idTags" name="tags" class="pure-input-3-4" type="hidden" placeholder="Tags" />
 						</div>
 
 						<div class="pure-controls">

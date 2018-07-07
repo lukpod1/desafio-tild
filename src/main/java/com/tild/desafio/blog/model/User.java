@@ -1,13 +1,20 @@
 package com.tild.desafio.blog.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.common.base.Preconditions;
-
-import javax.persistence.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.base.Preconditions;
 
 @Entity
 public class User {
@@ -16,12 +23,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String twitter;
     
+    @NotBlank
     private String phone;
     
+    @NotBlank
+    @Email
     private String email;
 
     @JsonIgnoreProperties("user")
@@ -32,6 +44,13 @@ public class User {
         super();
     }
 
+    public User(String name, String twitter, String phone, String email) {
+    	this.name = name;
+    	this.twitter = twitter;
+    	this.phone = phone;
+    	this.email = email;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -105,28 +124,21 @@ public class User {
 				+ "]";
 	}
 
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", twitter='" + twitter + '\'' +
-//                '}';
-//    }
     
-//    public boolean addUser() {
-//    	boolean add = false;
-//    	
-//    	try {
-//    		Arrays.asList(this.getName()).forEach(Preconditions::checkNotNull);
-//			
-//    		add = true;
-//		} catch (Exception e) {
-//			add = false;
-//		}
-//    	
-//    	return add;
-//    }
+    public boolean isValid() {
+    	boolean valid = false;
+    	
+    	try {
+    		Arrays.asList(this.getName(), this.getPhone(), this.getTwitter(), this.getEmail())
+    		.forEach(Preconditions::checkNotNull);
+			
+    		valid = true;
+		} catch (Exception e) {
+			valid = false;
+		}
+    	
+    	return valid;
+    }
     
     
     
