@@ -1,8 +1,11 @@
 package com.tild.desafio.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.base.Preconditions;
 
 import javax.persistence.*;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -96,12 +99,35 @@ public class User {
         return Objects.hash(id, twitter);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", twitter='" + twitter + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", twitter=" + twitter + ", phone=" + phone + ", email=" + email
+				+ "]";
+	}
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", twitter='" + twitter + '\'' +
+//                '}';
+//    }
+    
+//    public boolean addUser() {
+//    	boolean add = false;
+//    	
+//    	try {
+//    		Arrays.asList(this.getName()).forEach(Preconditions::checkNotNull);
+//			
+//    		add = true;
+//		} catch (Exception e) {
+//			add = false;
+//		}
+//    	
+//    	return add;
+//    }
+    
+    
+    
 }

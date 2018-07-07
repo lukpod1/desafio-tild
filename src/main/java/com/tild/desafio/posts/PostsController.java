@@ -36,15 +36,6 @@ public class PostsController {
         return mv;
     }
     
-    @GetMapping("/form")
-    public ModelAndView newUser(){
-        ModelAndView mv = new ModelAndView("form");
-    	
-        mv.addObject("newUser", new User());
-        
-        return mv;
-    }
-
     @PostMapping
     public ModelAndView createPost(Post post) {
         if(post.isValid())
@@ -52,4 +43,5 @@ public class PostsController {
 
         return new ModelAndView("redirect:/");
     }
+    
 }
